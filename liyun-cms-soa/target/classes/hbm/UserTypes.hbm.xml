@@ -1,0 +1,104 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 类型 -->
+	<!-- 字典 -->
+	<typedef name="DictEnum" class="com.liyun.car.param.usertype.DictType">
+		<param name="enumClass">com.liyun.car.param.usertype.DictEnum</param>
+	</typedef>
+	<!-- common -->
+	<typedef name="BooleanEnum" class="com.liyun.car.hibernate.type.EnumType">
+		<param name="enumClass">com.liyun.car.common.enums.BooleanEnum</param>
+	</typedef>
+	<typedef name="ParamStatusEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.common.enums.ParamStatusEnum</param>
+    </typedef>
+    <!-- system -->
+	<typedef name="SexEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.system.enums.SexEnum</param>
+    </typedef>
+	<typedef name="DepartmentLevelEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.param.enums.DepartmentLevelEnum</param>
+    </typedef>
+	<typedef name="AnnouncementTypeEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.param.enums.AnnouncementTypeEnum</param>
+    </typedef>
+	<typedef name="ModelTypeEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.param.enums.ModelTypeEnum</param>
+    </typedef>
+	<typedef name="TaskTypeEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.param.enums.TaskTypeEnum</param>
+    </typedef>
+	<typedef name="TaskStatusEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.param.enums.TaskStatusEnum</param>
+    </typedef>
+	<typedef name="UserStatusEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.system.enums.UserStatusEnum</param>
+    </typedef>
+	<typedef name="UserTypeEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.system.enums.UserTypeEnum</param>
+    </typedef>
+    <!-- dealer -->
+	<typedef name="AccountTypeEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.dealer.enums.AccountTypeEnum</param>
+    </typedef>
+	<typedef name="BillPayStatusEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.dealer.enums.BillPayStatusEnum</param>
+    </typedef>
+	<typedef name="DealerActionEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.dealer.enums.DealerActionEnum</param>
+    </typedef>
+	<typedef name="DealerStatusEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.dealer.enums.DealerStatusEnum</param>
+    </typedef>
+	<typedef name="DealerTypeEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.dealer.enums.DealerTypeEnum</param>
+    </typedef>
+	<typedef name="SaleAreaEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.dealer.enums.SaleAreaEnum</param>
+    </typedef>
+    <!-- materiel -->
+	<typedef name="DealerMaterielActionEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.materiel.enums.DealerMaterielActionEnum</param>
+    </typedef>
+	<typedef name="DealerMaterielStatusEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.materiel.enums.DealerMaterielStatusEnum</param>
+    </typedef>
+    <!-- activity -->
+	<typedef name="ActivityCycleEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.activity.enums.ActivityCycleEnum</param>
+    </typedef>
+	<typedef name="RuleRewardTypeEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.activity.enums.RuleRewardTypeEnum</param>
+    </typedef>
+	<typedef name="RuleReturnTypeEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.activity.enums.RuleReturnTypeEnum</param>
+    </typedef>
+	<typedef name="RuleLevelEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.activity.enums.RuleLevelEnum</param>
+    </typedef>
+	<typedef name="ActivityStatusEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.activity.enums.ActivityStatusEnum</param>
+    </typedef>
+	<typedef name="RuleCycleEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.activity.enums.RuleCycleEnum</param>
+    </typedef>
+	<typedef name="ReachTypeEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.activity.enums.ReachTypeEnum</param>
+    </typedef>
+    <!-- serfee -->
+    <typedef name="SerfeeStatusEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.fee.enums.SerfeeStatusEnum</param>
+    </typedef>
+	<typedef name="SerfeeBillStatusEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.fee.enums.SerfeeBillStatusEnum</param>
+    </typedef>
+	<typedef name="SerfeeActionEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.fee.enums.SerfeeActionEnum</param>
+    </typedef>
+	<typedef name="SerfeeBillActionEnum" class="com.liyun.car.hibernate.type.EnumType">
+    	<param name="enumClass">com.liyun.car.fee.enums.SerfeeBillActionEnum</param>
+    </typedef>
+</hibernate-mapping>
+
