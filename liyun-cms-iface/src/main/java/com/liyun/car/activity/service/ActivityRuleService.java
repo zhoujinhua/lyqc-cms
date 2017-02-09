@@ -13,4 +13,8 @@ public interface ActivityRuleService extends HibernateService {
 
 	List<CmsActivityRule> getAvliaList(CmsActivityRule rule, String ruleIds);
 
+	List<String> getActivityTree(String acttCode);
+
+	void saveActivityRuleCopy(String acttCode, String ids) throws Exception;
+
 }

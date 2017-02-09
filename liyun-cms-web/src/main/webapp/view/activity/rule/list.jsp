@@ -84,6 +84,7 @@ if(stt!=null && !"".equals(stt)){
 				                        <a href="#" class="btn btn-primary btn-mini" id="fn-btn-search"><i class="glyphicon glyphicon-search"></i> 查询</a>
 				                        <c:if test="${stt == '2' }">
 				                        	<a href="#" class="btn btn-default btn-mini" id="fn-btn-add"><i class="glyphicon glyphicon-plus"></i> 新增</a>
+				                        	<a href="#" class="btn btn-default btn-mini" id="fn-btn-copy"><i class="glyphicon glyphicon-list-alt"></i> 复制</a>
 				                    	</c:if>
 			                        	<a href="#" class="btn btn-success btn-mini" id="fn-btn-ex"><i class="glyphicon glyphicon-plus"></i> 互斥管理</a>
 				                    </p>
@@ -122,6 +123,8 @@ if(stt!=null && !"".equals(stt)){
 		       </div>
 	       </div>
        </div>
+	</div>
+	<div id="propTree" class="ztree" >
 	</div>
 </body>
 </html>

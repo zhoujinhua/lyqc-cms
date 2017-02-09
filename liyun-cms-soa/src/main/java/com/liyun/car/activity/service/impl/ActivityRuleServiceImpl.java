@@ -12,6 +12,7 @@ import java.util.Set;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
+import com.liyun.car.activity.entity.CmsActivityInfo;
 import com.liyun.car.activity.entity.CmsActivityPropDicDealer;
 import com.liyun.car.activity.entity.CmsActivityRule;
 import com.liyun.car.activity.entity.CmsActivityRuleEx;
@@ -74,6 +75,7 @@ public class ActivityRuleServiceImpl extends HibernateServiceSupport implements 
 					if(!field.getName().equals("ruleId") && !field.getName().equals("productName")&& !field.getName().substring(field.getName().length()-2, field.getName().length()).toLowerCase().equals("zh")){
 						Object obj = BeanInvokeUtils.invokeMethod(rule.getContrProp(), field.getName());
 						String fieldValue = obj == null?null : obj.toString();
+						System.out.println(field.getName() + "   --------"+props.contains(field.getName()));
 						if(fieldValue!=null && !"".equals(fieldValue.toString())){
 							String formatValue = fieldValue;
 							if(props.contains(field.getName())){
@@ -140,7 +142,7 @@ public class ActivityRuleServiceImpl extends HibernateServiceSupport implements 
 			}
 		} else {
 			rule.setCrtTime(new Date());
-			rule.getDealerProps().clear();
+			//rule.getDealerProps().clear();
 			saveEntity(rule);
 			
 			if(rule.getRuleLvl() == RuleLevelEnum.APP){
@@ -277,6 +279,45 @@ public class ActivityRuleServiceImpl extends HibernateServiceSupport implements 
 			if(tempRuleIds.size()!=0){
 				ruleIds.addAll(tempRuleIds);
 				getAssoRuleIds(ruleIds);
+			}
+		}
+	}
+
+	@Override
+	public List<String> getActivityTree(String acttCode) {
+		List<CmsActivityInfo> list = getList(new CmsActivityInfo(), null);
+		if(list!=null && !list.isEmpty()){
+			List<String> treeList = new ArrayList<String>();
+			for(CmsActivityInfo activityInfo : list){
+				if(!acttCode.equals(activityInfo.getActtCode())){
+					treeList.add("{id:\""+activityInfo.getActtCode()+"\",pId:\"999999\",name:\""+activityInfo.getActtNm()+"\"}");
+					Hibernate.initialize(activityInfo.getActivityRules());
+					if(activityInfo.getActivityRules()!=null && !activityInfo.getActivityRules().isEmpty()){
+						for(CmsActivityRule activityRule : activityInfo.getActivityRules()){
+							treeList.add("{id:\""+activityRule.getRuleId()+"\",pId:\""+activityInfo.getActtCode()+"\",name:\""+activityRule.getRuleNm()+"\",desc:\""+activityRule.getRuleDesc()+"\"}");
+						}
+					}
+				}
+			}
+			return treeList;
+		}
+		return null;
+	}
+
+	@Override
+	public void saveActivityRuleCopy(String acttCode, String ids) throws Exception {
+		CmsActivityInfo activityInfo = new CmsActivityInfo();
+		activityInfo.setActtCode(acttCode);
+		if(ids!=null && !"".equals(ids)){
+			for(String id : ids.split(",")){
+				CmsActivityRule activityRule = getEntityById(CmsActivityRule.class, Integer.parseInt(id), true);
+				CmsActivityRule rule = (CmsActivityRule) BeanInvokeUtils.cloneObject(activityRule, OperMode.OR, "ruleId","props","dealerProps","activityInfo","contrProp");
+				
+				rule.setActivityInfo(activityInfo);
+				CmsContrRuleProp prop = (CmsContrRuleProp) BeanInvokeUtils.cloneObject(activityRule.getContrProp(), null, null);
+				rule.setContrProp(prop);
+				saveActivityRule(rule);
+				
 			}
 		}
 	}

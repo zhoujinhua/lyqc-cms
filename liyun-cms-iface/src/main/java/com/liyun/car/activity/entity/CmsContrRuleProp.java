@@ -67,10 +67,10 @@ public class CmsContrRuleProp implements Serializable{
 	public String getRcarloanAmountMax() {
 		return rcarloanAmountMax;
 	}
-	public String getrGPSFee() {
+	public String getRGPSFee() {
 		return rGPSFee;
 	}
-	public void setrGPSFee(String rGPSFee) {
+	public void setRGPSFee(String rGPSFee) {
 		this.rGPSFee = rGPSFee;
 	}
 	public void setRcarloanAmountMax(String rcarloanAmountMax) {
@@ -158,10 +158,10 @@ public class CmsContrRuleProp implements Serializable{
 	public void setRloanPeriods(String rloanPeriods) {
 		this.rloanPeriods = rloanPeriods;
 	}
-	public String getrLoanRate() {
+	public String getRLoanRate() {
 		return rLoanRate;
 	}
-	public void setrLoanRate(String rLoanRate) {
+	public void setRLoanRate(String rLoanRate) {
 		this.rLoanRate = rLoanRate;
 	}
 	public String getSalePriceMax() {
@@ -236,6 +236,84 @@ public class CmsContrRuleProp implements Serializable{
 	public void setAppTimeMin(String appTimeMin) {
 		this.appTimeMin = appTimeMin;
 	}
+	public String getRComFeeMax() {
+		return rComFeeMax;
+	}
+	public void setRComFeeMax(String rComFeeMax) {
+		this.rComFeeMax = rComFeeMax;
+	}
+	public String getRComFeeMin() {
+		return rComFeeMin;
+	}
+	public void setRComFeeMin(String rComFeeMin) {
+		this.rComFeeMin = rComFeeMin;
+	}
+	public String getRAccountFeeMin() {
+		return rAccountFeeMin;
+	}
+	public void setRAccountFeeMin(String rAccountFeeMin) {
+		this.rAccountFeeMin = rAccountFeeMin;
+	}
+	public String getRAccountFeeMax() {
+		return rAccountFeeMax;
+	}
+	public void setRAccountFeeMax(String rAccountFeeMax) {
+		this.rAccountFeeMax = rAccountFeeMax;
+	}
+	public String getRDisTrueEMin() {
+		return rDisTrueEMin;
+	}
+	public void setRDisTrueEMin(String rDisTrueEMin) {
+		this.rDisTrueEMin = rDisTrueEMin;
+	}
+	public String getRDisTrueEMax() {
+		return rDisTrueEMax;
+	}
+	public void setRDisTrueEMax(String rDisTrueEMax) {
+		this.rDisTrueEMax = rDisTrueEMax;
+	}
+	public String getRYanbaoFee() {
+		return rYanbaoFee;
+	}
+	public void setRYanbaoFee(String rYanbaoFee) {
+		this.rYanbaoFee = rYanbaoFee;
+	}
+	public String getComRate() {
+		return comRate;
+	}
+	public void setComRate(String comRate) {
+		this.comRate = comRate;
+	}
+	public String getGpsRebate() {
+		return gpsRebate;
+	}
+	public void setGpsRebate(String gpsRebate) {
+		this.gpsRebate = gpsRebate;
+	}
+	public String getWorkCity() {
+		return workCity;
+	}
+	public void setWorkCity(String workCity) {
+		this.workCity = workCity;
+	}
+	public String getContrSTT() {
+		return contrSTT;
+	}
+	public void setContrSTT(String contrSTT) {
+		this.contrSTT = contrSTT;
+	}
+	public String getrGPSFee() {
+		return rGPSFee;
+	}
+	public void setrGPSFee(String rGPSFee) {
+		this.rGPSFee = rGPSFee;
+	}
+	public String getrLoanRate() {
+		return rLoanRate;
+	}
+	public void setrLoanRate(String rLoanRate) {
+		this.rLoanRate = rLoanRate;
+	}
 	public String getrComFeeMax() {
 		return rComFeeMax;
 	}
@@ -278,28 +356,8 @@ public class CmsContrRuleProp implements Serializable{
 	public void setrYanbaoFee(String rYanbaoFee) {
 		this.rYanbaoFee = rYanbaoFee;
 	}
-	public String getComRate() {
-		return comRate;
+	public void setIsLcvZh(String isLcvZh) {
+		this.isLcvZh = isLcvZh;
 	}
-	public void setComRate(String comRate) {
-		this.comRate = comRate;
-	}
-	public String getGpsRebate() {
-		return gpsRebate;
-	}
-	public void setGpsRebate(String gpsRebate) {
-		this.gpsRebate = gpsRebate;
-	}
-	public String getWorkCity() {
-		return workCity;
-	}
-	public void setWorkCity(String workCity) {
-		this.workCity = workCity;
-	}
-	public String getContrSTT() {
-		return contrSTT;
-	}
-	public void setContrSTT(String contrSTT) {
-		this.contrSTT = contrSTT;
-	}
+	
 }

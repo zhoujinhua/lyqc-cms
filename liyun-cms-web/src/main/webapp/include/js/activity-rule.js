@@ -98,11 +98,26 @@ $(function() {
 		}
 		
 	});
+	var setting = {
+  		view: {
+                selectedMulti: false
+          },
+          check: {
+ 				enable: true
+ 			},
+          data: {
+ 				simpleData: {
+ 					enable: true
+ 				}
+ 			},
+		callback: {
+ 		}
+ 	}; 
 	$(document).delegate('.delete','click',function() {
 		var ruleId = $(this).attr("data-id");
 		$.confirm("确定要删除该规则吗？", function(ok){
      		if(ok){
-     			location.href= contextPath + "/rule/delete?ruleId="+ruleId;
+     			location.href= contextPath + "/rule/delete?ruleId="+ruleId+"&activityInfo.acttCode="+acttCode+"&activityInfo.stt="+stt;
      		}
 		 });
     });
@@ -115,9 +130,61 @@ $(function() {
    $(document).delegate('#fn-btn-search','click',function() {
 	   table.ajax.reload();	
    });
+   $(document).delegate("#fn-btn-copy",'click',function(){
+	   var ec = $(this);
+		$.ajax({
+			  type: 'POST',
+			  url: contextPath + '/rule/getActivityTree?acttCode='+acttCode,
+			  success: function(data){
+					propDialog(ec,data,"活动规则复制");
+			  },
+			  dataType: 'json'
+		});
+   });
 	$(".chosen").chosen({
         no_results_text: "未发现匹配的字符串!",
     	allow_single_deselect: true,
     	width:"100%"
 	});
+	function propDialog(ec,jsonArray,title){
+		$.fn.zTree.init($("#propTree"), setting, jsonArray);
+		var prop_name = ec.parent().siblings(".prop-name");
+		var prop_value = ec.parent().siblings(".prop-value");
+		$("#propTree").dialog({
+			title:title,
+			width:340,
+			height:520,
+			modal:true,
+			buttons:[{
+	     		  name:'确定',
+	     			callback:function(){
+	     				var zTree = $.fn.zTree.getZTreeObj("propTree");
+	     				var nodes = zTree.getCheckedNodes(true);
+	     				var ids =" ";
+	     				
+	     				if(nodes!=null&&nodes.length!=0){
+	     					for(var i=0;i<nodes.length;i++){
+	     						if(!nodes[i].isParent){
+	     							ids += nodes[i].id+",";
+	     						}
+	     					}
+	     					ids = ids.substring(0,ids.length-1).trim();
+	     					$.ajax({
+	     						  type: 'POST',
+	     						  url: contextPath + '/rule/saveCopy?acttCode='+acttCode+'&ids='+ids,
+	     						  success: function(data){
+	     								if(data.responseCode == '1'){
+	     									$("#fn-btn-search").click();
+	     									$(".dialog-close").click();
+	     								} else {
+	     									$.alert(data.responseMsg);
+	     								}
+	     						  },
+	     						  dataType: 'json'
+	     					});
+	     				}
+	     			}
+		         }]
+		});
+	}
 });

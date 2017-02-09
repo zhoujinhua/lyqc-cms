@@ -1,12 +1,14 @@
 package com.liyun.car.activity.entity;
 
+import java.io.Serializable;
+
 import com.liyun.car.activity.enums.ReachTypeEnum;
 import com.liyun.car.activity.enums.RuleCycleEnum;
 import com.liyun.car.common.enums.BooleanEnum;
 import com.liyun.car.hibernate.utils.EnumUtils;
 import com.liyun.car.param.usertype.DictEnum;
 
-public class CmsDealerRuleProp {
+public class CmsDealerRuleProp implements Serializable{
 	
 	private Integer id;
 	private CmsActivityRule rule;

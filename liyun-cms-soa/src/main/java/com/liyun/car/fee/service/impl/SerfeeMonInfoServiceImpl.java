@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -23,6 +24,7 @@ import com.liyun.car.activity.enums.RuleLevelEnum;
 import com.liyun.car.common.enums.BooleanEnum;
 import com.liyun.car.common.enums.OperMode;
 import com.liyun.car.common.utils.ArithUtil;
+import com.liyun.car.common.utils.DateUtil;
 import com.liyun.car.common.utils.PropertyUtil;
 import com.liyun.car.common.utils.StringUtils;
 import com.liyun.car.core.utils.ExcelUtils;
@@ -102,7 +104,7 @@ public class SerfeeMonInfoServiceImpl extends HibernateServiceSupport implements
         updateEntity(info, "stt");
         workflowService.completeTask(taskId, variables);
 	}
-
+	
 	@Override
 	@Transactional
 	public File genSerfeeCalFile(CmsSerfeeMonInfo info) throws Exception {
@@ -146,9 +148,13 @@ public class SerfeeMonInfoServiceImpl extends HibernateServiceSupport implements
 				+ " where CS.FEE_MON='"+info.getFeeMon()+"'";
 		String[] sqlContrDtlHead = new String[]{"申请单编号","放款日期","销售区域","门店名称","单位性质","申请人姓名","品牌","款式","是否二手车","放款渠道","车辆贷款金额(元)","贴息金额","贷款期限","账户管理费","是否安装GPS","GPS费用(元)","贷款利率","总贷款金额(贷款金额+GPS费用)","是否LCV",/*"经销商服务费金额",*/"活动编码","活动名称","规则名称","规则奖罚方式","申请单规则金额","规则描述"};
 		
-		CmsActivityInfo cmsActivityInfo = new CmsActivityInfo();
-		cmsActivityInfo.setStt(ActivityStatusEnum.ON);
-		List<CmsActivityInfo> activityInfos = getEntitysByParams(cmsActivityInfo, OperMode.EQ, "stt");
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.YEAR, Integer.parseInt(info.getFeeMon().substring(0,4)));
+		c.set(Calendar.MONTH, Integer.parseInt(info.getFeeMon().substring(4,6)));
+		c.set(Calendar.DAY_OF_MONTH, 0);
+		
+		String hql = "from CmsActivityInfo c where c.stt = '1' and ((c.acttCyc = '1' and DATE_FORMAT(c.acttEnd,'%Y%m') = '"+info.getFeeMon()+"' and date(c.acttEnd) <= '"+DateUtil.getDateFormatE(c.getTime())+"')) or ((c.acttCyc = '0' and '"+DateUtil.getDateFormatE(c.getTime())+"' = LAST_DAY('"+DateUtil.getDateFormatE(c.getTime())+"')))";
+		List<CmsActivityInfo> activityInfos = getList(hql);
 		if(activityInfos!=null && !activityInfos.isEmpty()){
 			for(CmsActivityInfo activityInfo : activityInfos){
 				Hibernate.initialize(activityInfo.getActivityRules());

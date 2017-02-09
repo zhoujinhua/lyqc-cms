@@ -20,6 +20,7 @@ import com.liyun.car.activity.entity.CmsActivityRule;
 import com.liyun.car.activity.service.ActivityRuleService;
 import com.liyun.car.common.entity.Page;
 import com.liyun.car.common.enums.ParamStatusEnum;
+import com.liyun.car.core.utils.ReturnUitl;
 import com.liyun.car.loan.entity.CaGpsRule;
 import com.liyun.car.loan.entity.CaProduct;
 import com.liyun.car.loan.entity.CaRateRule;
@@ -191,6 +192,31 @@ public class ActivityRuleController {
 			pw.println(JSONArray.fromObject(treeList).toString());
 		} catch(Exception e){
 			logger.error("工作城市树封装失败,",e);
+		}
+	}
+	
+	@RequestMapping("getActivityTree")
+	public void getActivityTree(HttpServletRequest request, HttpServletResponse response){
+		PrintWriter pw = null;
+		try{
+			pw = response.getWriter();
+			String acttCode = request.getParameter("acttCode");
+			List<String> treeList = activityRuleService.getActivityTree(acttCode);
+			pw.println(JSONArray.fromObject(treeList).toString());
+		} catch(Exception e){
+			logger.error("活动树封装失败,",e);
+		}
+	}
+	
+	@RequestMapping("saveCopy")
+	public void saveCopy(HttpServletRequest request, HttpServletResponse response){
+		try{
+			String ids = request.getParameter("ids");
+			String acttCode = request.getParameter("acttCode");
+			activityRuleService.saveActivityRuleCopy(acttCode, ids);
+			ReturnUitl.write(response, 1);
+		} catch(Exception e){
+			ReturnUitl.write(response, 0,"操作失败,"+e.getMessage());
 		}
 	}
 }

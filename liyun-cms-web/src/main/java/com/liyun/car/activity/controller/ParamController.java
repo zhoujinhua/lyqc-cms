@@ -109,6 +109,6 @@ public class ParamController {
 			request.setAttribute("sub", sub);
 		}
 		request.setAttribute("topParamEn", sub.getParamTop().getTopParamEn());
-		return "activity/param/view";
+		return "activity/param/view?topParamEn="+sub.getParamTop().getTopParamEn();
 	}
 }
